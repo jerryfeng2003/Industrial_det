@@ -7,7 +7,6 @@ import argparse
 
 project_root = Path(__file__).resolve().parents[1]
 
-# path to dataset : windows->'.\xxx', linux->'./xxx'
 data_root = './data'
 
 cfg = EasyDict()
@@ -24,7 +23,11 @@ cfg.acc_bsz = 1
 cfg.train_set = 'train'
 cfg.model_name = 'swin_v2_b'
 cfg.from_scratch = True
-cfg.restore_from = './pretrain/' + cfg.model_name + '.pth'
+cfg.model_path = cfg.model_name + '.pth'
+if cfg.from_scratch and cfg.is_test == False:
+    cfg.restore_from = './pretrain/' + cfg.model_path
+else:
+    cfg.restore_from = './checkpoints/best_model_' + cfg.model_path
 
 # COMMON CONFIGS
 cfg.SEED = 114514  # 1234, 3407, 42

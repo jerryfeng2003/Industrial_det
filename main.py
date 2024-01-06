@@ -31,8 +31,6 @@ class Logger(object):
         pass
 
 
-
-
 # torch.cuda.synchronize()
 
 def train_epoch(model, train_loader, cfg, optimizer, epoch_num):
@@ -123,7 +121,8 @@ def val_epoch(model, data_loader, cfg, is_final=False):
                 top1_batch = top_k_accuracy(scores, labels, topk=(1,))[0]
                 top1_epoch.update(top1_batch, bsz)
 
-            results.append(batch['img_name'][0][14:-3] + 'CSV')
+            target = batch['img_name'][0].find('eJ')
+            results.append(batch['img_name'][0][target:-3] + 'CSV')
             predict.append(chr(ord('A') + int(preds)))
 
     if data_loader.dataset.split == 'val':
@@ -201,6 +200,8 @@ if __name__ == '__main__':
 
     if not cfg.is_test:
         train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg)
+        print("=================Start testing!=================", flush=True)
+        _ = val_epoch(model, test_loader, cfg, is_final=True)
     else:
         print("=================Start testing!=================", flush=True)
         _ = val_epoch(model, test_loader, cfg, is_final=True)
