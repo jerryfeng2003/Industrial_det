@@ -120,7 +120,6 @@ def val_epoch(model, data_loader, cfg, is_final=False):
 
                 top1_batch = top_k_accuracy(scores, labels, topk=(1,))[0]
                 top1_epoch.update(top1_batch, bsz)
-
             target = batch['img_name'][0].find('eJ')
             results.append(batch['img_name'][0][target:-3] + 'CSV')
             predict.append(chr(ord('A') + int(preds)))
@@ -136,6 +135,11 @@ def val_epoch(model, data_loader, cfg, is_final=False):
         df = pd.DataFrame(columns=['defectType', 'fileName'])
         df['fileName'] = results
         df['defectType'] = predict
+
+        # macro f1-score: fileName: ['eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.csv', 'eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.csv'];
+        df['fileName'][results.index('eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.CSV')] = 'eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.csv'
+        df['fileName'][results.index('eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.CSV')] = 'eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.csv'
+
         df.to_csv(pred_path, index=False)
         print("Predictions saved at {}".format(pred_path))
 

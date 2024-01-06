@@ -1,0 +1,9 @@
+Data root path:                          ./data/images
+Loading split from:                      ./data/test.txt
+Num of images:                           115
+Num of labels:                           0 0 Counter()
+Cache path:          /home/ipad_3d/fengtr/Industrial_det/datasets/cache/896
+Loading pretrained:  swin_v2_b
+Loading everything from ./checkpoints/best_model_swin_v2_b.pth
+=================Start testing!=================
+Predictions saved at /home/ipad_3d/fengtr/Industrial_det/experiments/2024_01_06_17_41_26/predictions.csv

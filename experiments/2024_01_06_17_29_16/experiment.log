@@ -1,0 +1,229 @@
+Data root path:                          ./data/images
+Loading split from:                      ./data/train.txt
+Loading labels from:                     ./data/labels_trainval.yaml
+Num of images:                           94
+Num of labels:                           94 5 Counter({'A': 27, 'B': 27, 'C': 21, 'D': 13, 'E': 6})
+Cache path:          /home/ipad_3d/fengtr/Industrial_det/datasets/cache/896
+Data root path:                          ./data/images
+Loading split from:                      ./data/val.txt
+Loading labels from:                     ./data/labels_trainval.yaml
+Num of images:                           21
+Num of labels:                           21 5 Counter({'A': 6, 'B': 6, 'C': 4, 'D': 3, 'E': 2})
+Cache path:          /home/ipad_3d/fengtr/Industrial_det/datasets/cache/896
+Data root path:                          ./data/images
+Loading split from:                      ./data/test.txt
+Num of images:                           115
+Num of labels:                           0 0 Counter()
+Cache path:          /home/ipad_3d/fengtr/Industrial_det/datasets/cache/896
+Loading pretrained:  swin_v2_b
+Loading everything from ./pretrain/swin_v2_b.pth
+Scheduler:  <torch.optim.lr_scheduler.ReduceLROnPlateau object at 0x7fde98ba8190>
+=================Epo 1: Training=================
+epo: 1-   0/  23, exp  5.0m/epo, avg 12.505s/b, loss_batch: 1.649 Acc (train-batch): 25.00% Acc (train-epoch): 25.00%
+Epoch 1: elapsed_time: 0.39m Acc (train): 30.85% [29.0, 94] loss_epo_avg: 1.505
+=================Epo 1: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 47.62% [10.0, 21] loss_epo_avg: 1.327
+Epo   1: Saving best ckpt to checkpoints/best_model_swin_v2_b.pth
+=================Epo 2: Training=================
+epo: 2-   0/  23, exp  1.0m/epo, avg 2.617s/b, loss_batch: 1.616 Acc (train-batch): 25.00% Acc (train-epoch): 25.00%
+Epoch 2: elapsed_time: 0.22m Acc (train): 50.00% [47.0, 94] loss_epo_avg: 1.289
+=================Epo 2: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 47.62% [10.0, 21] loss_epo_avg: 1.210
+=================Epo 3: Training=================
+epo: 3-   0/  23, exp  1.0m/epo, avg 2.443s/b, loss_batch: 1.679 Acc (train-batch): 25.00% Acc (train-epoch): 25.00%
+Epoch 3: elapsed_time: 0.23m Acc (train): 57.45% [54.0, 94] loss_epo_avg: 1.253
+=================Epo 3: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 38.10% [8.0, 21] loss_epo_avg: 1.275
+=================Epo 4: Training=================
+epo: 4-   0/  23, exp  1.0m/epo, avg 2.492s/b, loss_batch: 1.436 Acc (train-batch):  0.00% Acc (train-epoch):  0.00%
+Epoch 4: elapsed_time: 0.22m Acc (train): 48.94% [46.0, 94] loss_epo_avg: 1.202
+=================Epo 4: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 33.33% [7.0, 21] loss_epo_avg: 1.250
+=================Epo 5: Training=================
+epo: 5-   0/  23, exp  1.0m/epo, avg 2.614s/b, loss_batch: 1.452 Acc (train-batch): 25.00% Acc (train-epoch): 25.00%
+Epoch 5: elapsed_time: 0.22m Acc (train): 58.51% [55.0, 94] loss_epo_avg: 1.098
+=================Epo 5: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 66.67% [14.0, 21] loss_epo_avg: 1.099
+Epo   5: Saving best ckpt to checkpoints/best_model_swin_v2_b.pth
+=================Epo 6: Training=================
+epo: 6-   0/  23, exp  1.0m/epo, avg 2.452s/b, loss_batch: 0.869 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 6: elapsed_time: 0.22m Acc (train): 59.57% [56.0, 94] loss_epo_avg: 1.050
+=================Epo 6: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 66.67% [14.0, 21] loss_epo_avg: 1.048
+=================Epo 7: Training=================
+epo: 7-   0/  23, exp  1.0m/epo, avg 2.391s/b, loss_batch: 0.499 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 7: elapsed_time: 0.22m Acc (train): 64.89% [61.0, 94] loss_epo_avg: 0.965
+=================Epo 7: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 42.86% [9.0, 21] loss_epo_avg: 1.546
+=================Epo 8: Training=================
+epo: 8-   0/  23, exp  1.1m/epo, avg 2.771s/b, loss_batch: 0.294 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 8: elapsed_time: 0.23m Acc (train): 68.09% [64.0, 94] loss_epo_avg: 0.901
+=================Epo 8: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 76.19% [16.0, 21] loss_epo_avg: 0.925
+Epo   8: Saving best ckpt to checkpoints/best_model_swin_v2_b.pth
+=================Epo 9: Training=================
+epo: 9-   0/  23, exp  1.0m/epo, avg 2.432s/b, loss_batch: 0.520 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 9: elapsed_time: 0.23m Acc (train): 69.15% [65.0, 94] loss_epo_avg: 0.878
+=================Epo 9: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 66.67% [14.0, 21] loss_epo_avg: 1.013
+=================Epo 10: Training=================
+epo:10-   0/  23, exp  0.9m/epo, avg 2.257s/b, loss_batch: 0.580 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 10: elapsed_time: 0.22m Acc (train): 71.28% [67.0, 94] loss_epo_avg: 0.805
+=================Epo 10: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 66.67% [14.0, 21] loss_epo_avg: 0.982
+=================Epo 11: Training=================
+epo:11-   0/  23, exp  0.9m/epo, avg 2.369s/b, loss_batch: 0.185 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 11: elapsed_time: 0.22m Acc (train): 76.60% [72.0, 94] loss_epo_avg: 0.732
+=================Epo 11: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 61.90% [13.0, 21] loss_epo_avg: 0.937
+=================Epo 12: Training=================
+epo:12-   0/  23, exp  1.0m/epo, avg 2.581s/b, loss_batch: 1.480 Acc (train-batch): 50.00% Acc (train-epoch): 50.00%
+Epoch 12: elapsed_time: 0.23m Acc (train): 72.34% [68.0, 94] loss_epo_avg: 0.799
+=================Epo 12: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.799
+Epoch 00012: reducing learning rate of group 0 to 1.0000e-05.
+=================Epo 13: Training=================
+epo:13-   0/  23, exp  1.0m/epo, avg 2.559s/b, loss_batch: 0.445 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 13: elapsed_time: 0.23m Acc (train): 84.04% [79.0, 94] loss_epo_avg: 0.584
+=================Epo 13: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.859
+=================Epo 14: Training=================
+epo:14-   0/  23, exp  1.0m/epo, avg 2.380s/b, loss_batch: 0.786 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 14: elapsed_time: 0.23m Acc (train): 77.66% [73.0, 94] loss_epo_avg: 0.622
+=================Epo 14: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.868
+=================Epo 15: Training=================
+epo:15-   0/  23, exp  1.0m/epo, avg 2.404s/b, loss_batch: 0.675 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 15: elapsed_time: 0.22m Acc (train): 77.66% [73.0, 94] loss_epo_avg: 0.593
+=================Epo 15: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.837
+=================Epo 16: Training=================
+epo:16-   0/  23, exp  1.0m/epo, avg 2.491s/b, loss_batch: 0.316 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 16: elapsed_time: 0.22m Acc (train): 77.66% [73.0, 94] loss_epo_avg: 0.559
+=================Epo 16: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.859
+=================Epo 17: Training=================
+epo:17-   0/  23, exp  1.0m/epo, avg 2.537s/b, loss_batch: 0.926 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 17: elapsed_time: 0.22m Acc (train): 81.91% [77.0, 94] loss_epo_avg: 0.533
+=================Epo 17: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.848
+Epoch 00017: reducing learning rate of group 0 to 1.0000e-06.
+=================Epo 18: Training=================
+epo:18-   0/  23, exp  1.0m/epo, avg 2.407s/b, loss_batch: 0.139 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 18: elapsed_time: 0.22m Acc (train): 84.04% [79.0, 94] loss_epo_avg: 0.538
+=================Epo 18: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.845
+=================Epo 19: Training=================
+epo:19-   0/  23, exp  0.9m/epo, avg 2.280s/b, loss_batch: 0.066 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 19: elapsed_time: 0.22m Acc (train): 81.91% [77.0, 94] loss_epo_avg: 0.518
+=================Epo 19: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.838
+=================Epo 20: Training=================
+epo:20-   0/  23, exp  0.9m/epo, avg 2.361s/b, loss_batch: 0.372 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 20: elapsed_time: 0.22m Acc (train): 85.11% [80.0, 94] loss_epo_avg: 0.466
+=================Epo 20: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.829
+=================Epo 21: Training=================
+epo:21-   0/  23, exp  1.0m/epo, avg 2.546s/b, loss_batch: 0.558 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 21: elapsed_time: 0.23m Acc (train): 80.85% [76.0, 94] loss_epo_avg: 0.581
+=================Epo 21: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.821
+=================Epo 22: Training=================
+epo:22-   0/  23, exp  1.0m/epo, avg 2.384s/b, loss_batch: 0.444 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 22: elapsed_time: 0.22m Acc (train): 82.98% [78.0, 94] loss_epo_avg: 0.506
+=================Epo 22: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+Epoch 00022: reducing learning rate of group 0 to 1.0000e-07.
+=================Epo 23: Training=================
+epo:23-   0/  23, exp  1.1m/epo, avg 2.669s/b, loss_batch: 0.611 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 23: elapsed_time: 0.23m Acc (train): 84.04% [79.0, 94] loss_epo_avg: 0.523
+=================Epo 23: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 24: Training=================
+epo:24-   0/  23, exp  1.1m/epo, avg 2.655s/b, loss_batch: 0.108 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 24: elapsed_time: 0.23m Acc (train): 82.98% [78.0, 94] loss_epo_avg: 0.531
+=================Epo 24: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 25: Training=================
+epo:25-   0/  23, exp  1.0m/epo, avg 2.428s/b, loss_batch: 1.501 Acc (train-batch): 50.00% Acc (train-epoch): 50.00%
+Epoch 25: elapsed_time: 0.23m Acc (train): 80.85% [76.0, 94] loss_epo_avg: 0.571
+=================Epo 25: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 26: Training=================
+epo:26-   0/  23, exp  1.0m/epo, avg 2.436s/b, loss_batch: 0.060 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 26: elapsed_time: 0.22m Acc (train): 81.91% [77.0, 94] loss_epo_avg: 0.535
+=================Epo 26: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 27: Training=================
+epo:27-   0/  23, exp  1.0m/epo, avg 2.410s/b, loss_batch: 0.184 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 27: elapsed_time: 0.22m Acc (train): 82.98% [78.0, 94] loss_epo_avg: 0.542
+=================Epo 27: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+Epoch 00027: reducing learning rate of group 0 to 1.0000e-08.
+=================Epo 28: Training=================
+epo:28-   0/  23, exp  0.9m/epo, avg 2.283s/b, loss_batch: 0.471 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 28: elapsed_time: 0.23m Acc (train): 84.04% [79.0, 94] loss_epo_avg: 0.545
+=================Epo 28: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 29: Training=================
+epo:29-   0/  23, exp  1.0m/epo, avg 2.480s/b, loss_batch: 0.645 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 29: elapsed_time: 0.22m Acc (train): 84.04% [79.0, 94] loss_epo_avg: 0.548
+=================Epo 29: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 30: Training=================
+epo:30-   0/  23, exp  1.0m/epo, avg 2.459s/b, loss_batch: 0.666 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 30: elapsed_time: 0.22m Acc (train): 78.72% [74.0, 94] loss_epo_avg: 0.570
+=================Epo 30: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 31: Training=================
+epo:31-   0/  23, exp  0.9m/epo, avg 2.338s/b, loss_batch: 0.463 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 31: elapsed_time: 0.22m Acc (train): 81.91% [77.0, 94] loss_epo_avg: 0.592
+=================Epo 31: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 32: Training=================
+epo:32-   0/  23, exp  1.0m/epo, avg 2.610s/b, loss_batch: 1.003 Acc (train-batch): 50.00% Acc (train-epoch): 50.00%
+Epoch 32: elapsed_time: 0.22m Acc (train): 80.85% [76.0, 94] loss_epo_avg: 0.533
+=================Epo 32: Validating=================
+Val: elapsed_time: 0.06m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 33: Training=================
+epo:33-   0/  23, exp  1.0m/epo, avg 2.559s/b, loss_batch: 0.391 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 33: elapsed_time: 0.22m Acc (train): 81.91% [77.0, 94] loss_epo_avg: 0.466
+=================Epo 33: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 34: Training=================
+epo:34-   0/  23, exp  1.0m/epo, avg 2.475s/b, loss_batch: 1.096 Acc (train-batch): 50.00% Acc (train-epoch): 50.00%
+Epoch 34: elapsed_time: 0.22m Acc (train): 80.85% [76.0, 94] loss_epo_avg: 0.573
+=================Epo 34: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 35: Training=================
+epo:35-   0/  23, exp  1.0m/epo, avg 2.488s/b, loss_batch: 0.162 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 35: elapsed_time: 0.23m Acc (train): 84.04% [79.0, 94] loss_epo_avg: 0.508
+=================Epo 35: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 36: Training=================
+epo:36-   0/  23, exp  1.1m/epo, avg 2.699s/b, loss_batch: 0.137 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 36: elapsed_time: 0.23m Acc (train): 82.98% [78.0, 94] loss_epo_avg: 0.581
+=================Epo 36: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 37: Training=================
+epo:37-   0/  23, exp  1.0m/epo, avg 2.386s/b, loss_batch: 0.479 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 37: elapsed_time: 0.23m Acc (train): 81.91% [77.0, 94] loss_epo_avg: 0.536
+=================Epo 37: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 38: Training=================
+epo:38-   0/  23, exp  1.1m/epo, avg 2.691s/b, loss_batch: 0.732 Acc (train-batch): 75.00% Acc (train-epoch): 75.00%
+Epoch 38: elapsed_time: 0.23m Acc (train): 82.98% [78.0, 94] loss_epo_avg: 0.552
+=================Epo 38: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 39: Training=================
+epo:39-   0/  23, exp  1.0m/epo, avg 2.493s/b, loss_batch: 0.614 Acc (train-batch): 50.00% Acc (train-epoch): 50.00%
+Epoch 39: elapsed_time: 0.23m Acc (train): 80.85% [76.0, 94] loss_epo_avg: 0.563
+=================Epo 39: Validating=================
+Val: elapsed_time: 0.05m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 40: Training=================
+epo:40-   0/  23, exp  1.0m/epo, avg 2.613s/b, loss_batch: 0.351 Acc (train-batch): 100.00% Acc (train-epoch): 100.00%
+Epoch 40: elapsed_time: 0.22m Acc (train): 86.17% [81.0, 94] loss_epo_avg: 0.517
+=================Epo 40: Validating=================
+Val: elapsed_time: 0.06m Acc (val): 71.43% [15.0, 21] loss_epo_avg: 0.819
+=================Epo 41: Training=================
+epo:41-   0/  23, exp  0.9m/epo, avg 2.305s/b, loss_batch: 1.601 Acc (train-batch): 25.00% Acc (train-epoch): 25.00%
