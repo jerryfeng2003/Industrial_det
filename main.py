@@ -112,6 +112,7 @@ def val_epoch(model, data_loader, cfg, is_final=False):
             scores = model.forward(img)
             preds = scores.argmax(1)
 
+
             if data_loader.dataset.split == 'val':
                 # if not is_final:
                 labels = batch['label_idxs'].to(device)
@@ -158,17 +159,19 @@ def train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg):
         if val_loader is not None:
             print("=================Epo {}: Validating=================".format(epoch))
             cur_acc = val_epoch(model, val_loader, cfg, is_final=False)
+            _ = save_last_model(epoch, model, optimizer, suffix=cfg.model_name)
 
             # save the best model
             if cur_acc > best_acc:
                 best_acc = cur_acc
-                best_path = save_best_model(epoch, model, optimizer, suffix=cfg.model_name)
+                _ = save_best_model(epoch, model, optimizer, suffix=cfg.model_name)
             scheduler.step(cur_acc)
             # print("Current lr: ", scheduler.get_last_lr())
 
         # w/o val set
         else:
-            best_path = save_best_model(epoch, model, optimizer, suffix=cfg.model_name)  # actually saving current model
+            _ = save_last_model(epoch, model, optimizer, suffix=cfg.model_name)
+            _ = save_best_model(epoch, model, optimizer, suffix=cfg.model_name)  # actually saving current model
             scheduler.step()
             # print("Current lr: ", scheduler.get_last_lr())
 

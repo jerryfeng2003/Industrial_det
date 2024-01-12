@@ -44,4 +44,4 @@ def get_metadata(data_root, split='train', verbose=True):
 
 if __name__ == '__main__':
     split = 'train'  # train,val, test
-    img_paths, label_names, class_to_ind = get_metadata(data_root, split, verbose=True)
+    img_paths, label_names, class_to_ind = get_metadata('.'+data_root, split, verbose=True)

@@ -16,12 +16,35 @@ cfg.is_test = False
 cfg.use_cache = False
 cfg.p_interval = 100
 cfg.ngups = 1
-cfg.im_scale = 896
+cfg.im_scale = 256
 cfg.bsz = 4
 cfg.num_classes = 5
 cfg.acc_bsz = 1
 cfg.train_set = 'train'
 cfg.model_name = 'swin_v2_b'
+
+# models:
+# Convnet:
+# resnet,efficientnet ,  convnext, convnext v2,
+# Transformer:
+# vit(scales), swin, maxvit, xxvit
+# Convnet + Transformer:
+# Coatnet, Coatnetv2, .....
+# Self supervised model:
+# beit, mae ....
+
+# Optimize ,lr strategies:....
+
+# lr adjust: EMA,..
+
+# transfer learning trick: ML-Encoder ....
+
+# Data argumentations: ...
+
+# Model ensemble: vote, add, (ME tactics...)
+
+# read papers !!!
+
 cfg.from_scratch = True
 cfg.model_path = cfg.model_name + '.pth'
 if cfg.from_scratch and cfg.is_test == False:

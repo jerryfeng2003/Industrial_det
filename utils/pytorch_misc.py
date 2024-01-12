@@ -125,6 +125,8 @@ def get_optim(model, cfg):
         optimizer = optim.Adam(model.parameters(), weight_decay=l2, lr=lr, eps=1e-3)
     elif opt == 'rmsprop':
         optimizer = optim.RMSprop(model.parameters(), lr=lr, weight_decay=l2, momentum=momentum)
+    elif opt == 'adamw':
+        optimizer = optim.adamw(model.parameters(),lr=lr)
 
     if cfg.train_set == 'train' or 'trainval':
         scheduler = ReduceLROnPlateau(optimizer, 'max', patience=3, factor=0.1, verbose=True, threshold=0.0001,
@@ -197,6 +199,18 @@ def save_best_model(epoch, model, optimizer, suffix=''):
         # 'state_dict': {k:v for k,v in model.state_dict().items() if not k.startswith('detector.')},
     }, save_path)
     print("Epo {:3}: Saving best ckpt to {}".format(epoch, save_path))
+    return save_path
+
+def save_last_model(epoch, model, optimizer, suffix=''):
+    save_path = os.path.join('checkpoints',
+                             'last_model' + '_' + suffix + '.pth')  # save mem, or 'model_{}.pth'.format(epoch))
+
+    torch.save({
+        'epoch': epoch,
+        'state_dict': model.state_dict(),
+        'optimizer': optimizer.state_dict(),
+        # 'state_dict': {k:v for k,v in model.state_dict().items() if not k.startswith('detector.')},
+    }, save_path)
     return save_path
 
 
