@@ -50,25 +50,25 @@ class DND(Dataset):
 
              :return: A PyTorch compatible Transform
              """
-            tform = create_transform(
-                input_size=cfg.im_scale,
-                is_training=True,
-                color_jitter=0.4,
-                auto_augment='rand-m1-mstd0.5-inc1',
-                re_prob=0.25,
-                re_mode='pixel',
-                re_count=1,
-                interpolation='bicubic',
-            )
-            self.tform_pipeline = tform
-            # tform = [
-            #     torchvision.transforms.Resize(cfg.im_scale),
-            #     RandomRotation(180),
-            #     RandomHorizontalFlip(),
-            #     # Cutout(),
-            #     # RandomPerspective(),
-            #     ToTensor(),
-            #     Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), ]
+            # tform = create_transform(
+            #     input_size=cfg.im_scale,
+            #     is_training=True,
+            #     color_jitter=0.4,
+            #     auto_augment='rand-m1-mstd0.5-inc1',
+            #     re_prob=0.25,
+            #     re_mode='pixel',
+            #     re_count=1,
+            #     interpolation='bicubic',
+            # )
+            # self.tform_pipeline = tform
+            tform = [
+                torchvision.transforms.Resize(cfg.im_scale),
+                RandomRotation(180),
+                RandomHorizontalFlip(),
+                # Cutout(),
+                # RandomPerspective(),
+                ToTensor(),
+                Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), ]
 
             self.tform_pipeline = Compose(tform)
         else:

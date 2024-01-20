@@ -1,7 +1,4 @@
 from pprint import pprint
-
-import numpy as np
-
 from configs.config import cfg
 import pandas as pd
 import torch
@@ -80,13 +77,14 @@ def train_epoch(model, train_loader, cfg, optimizer, epoch_num):
         scores = scores.detach().cpu().numpy()
         labels = labels.detach().cpu().numpy()
         temp = f1_score(scores, labels, average=None)
-        exist = np.unique(np.hstack((labels, scores)))
-        weight_exist = []
-        for i in exist:
-            weight_exist.append(weight[i])
-        weight_exist = np.array(weight_exist)
-        f1_batch = temp @ weight_exist
-        f1_batch = f1_batch / np.sum(weight_exist, axis=0)
+        if temp.shape != 5:
+            temp = np.hstack((temp, np.zeros(5 - temp.shape[0])))
+        f1_batch = temp @ weight
+        label_exist = np.unique(labels)
+        total_exist = 0.0
+        for i in label_exist:
+            total_exist = total_exist + weight[i]
+        f1_batch = f1_batch / total_exist
         f1_epoch.update(f1_batch, bsz)
 
         # gradient accumulation
@@ -149,13 +147,14 @@ def val_epoch(model, data_loader, cfg, is_final=False):
                 scores = scores.detach().cpu().numpy()
                 labels = labels.detach().cpu().numpy()
                 temp = f1_score(scores, labels, average=None)
-                exist = np.unique(np.hstack((labels, scores)))
-                weight_exist = []
-                for i in exist:
-                    weight_exist.append(weight[i])
-                weight_exist = np.array(weight_exist)
-                f1_batch = temp @ weight_exist
-                f1_batch = f1_batch / np.sum(weight_exist, axis=0)
+                if temp.shape != 5:
+                    temp = np.hstack((temp, np.zeros(5 - temp.shape[0])))
+                f1_batch = temp @ weight
+                label_exist = np.unique(labels)
+                total_exist = 0.0
+                for i in label_exist:
+                    total_exist = total_exist + weight[i]
+                f1_batch = f1_batch / total_exist
                 f1_epoch.update(f1_batch, bsz)
 
             target = batch['img_name'][0].find('eJ')
