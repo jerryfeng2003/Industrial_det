@@ -1,0 +1,18 @@
+Data root path:                          ./data\images
+Loading split from:                      ./data\train.txt
+Loading labels from:                     ./data\labels_trainval.yaml
+Num of images:                           94
+Num of labels:                           94 5 Counter({'A': 27, 'B': 27, 'C': 21, 'D': 13, 'E': 6})
+Cache path:          E:\clones\Industrial_det\Industrial_det\datasets/cache\256
+Data root path:                          ./data\images
+Loading split from:                      ./data\val.txt
+Loading labels from:                     ./data\labels_trainval.yaml
+Num of images:                           21
+Num of labels:                           21 5 Counter({'A': 6, 'B': 6, 'C': 4, 'D': 3, 'E': 2})
+Cache path:          E:\clones\Industrial_det\Industrial_det\datasets/cache\256
+Data root path:                          ./data\images
+Loading split from:                      ./data\test.txt
+Num of images:                           115
+Num of labels:                           0 0 Counter()
+Cache path:          E:\clones\Industrial_det\Industrial_det\datasets/cache\256
+Loading pretrained:  swin_v2_b

@@ -1,0 +1,7 @@
+Data root path:                          ./data\images
+Loading split from:                      ./data\train.txt
+Loading labels from:                     ./data\labels_trainval.yaml
+Num of images:                           94
+Num of labels:                           94 5 Counter({'A': 27, 'B': 27, 'C': 21, 'D': 13, 'E': 6})
+Cache path:          E:\clones\Industrial_det\Industrial_det\datasets/cache\256
+<datasets.dnd_dataset.DND object at 0x0000027BF00633D0>

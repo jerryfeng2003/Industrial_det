@@ -114,7 +114,7 @@ class LayerActivations:
 
 def get_optim(model, cfg):
     opt = cfg.TRAIN.OPTIM
-    lr = cfg.TRAIN.LR  # better for DND
+    lr = cfg.TRAIN.LR
     # lr = cfg.TRAIN.LR * cfg.NGPUS * cfg.bsz  # a hack
     l2 = cfg.TRAIN.WEIGHT_DECAY
     momentum = cfg.TRAIN.MOMENTUM

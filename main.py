@@ -1,17 +1,16 @@
 from pprint import pprint
-
 import numpy as np
-
 from configs.config import cfg
 import pandas as pd
 import torch
 import sys
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
 from torch.optim.lr_scheduler import ExponentialLR
 import torch.nn.functional as F
 from configs.config import cfg_from_file, project_root
-from datasets.dnd_dataset import DND
-from models.my_model import MyModel
+from datasets.dataset import Dataset_image
+from datasets.point_dataset import Dataset_point
+from models.my_model import MyModel, MyModel_point
 from utils.pytorch_misc import *
 import yaml
 from timm.data.mixup import Mixup
@@ -57,7 +56,7 @@ def train_epoch(model, train_loader, cfg, optimizer, epoch_num):
     timer_batch_avg.tic()
     for batch_num, batch in enumerate(train_loader):
 
-        img = batch['img'].to(device)
+        img = batch['img'].to(torch.float).to(device)
         labels = batch['label_idxs'].to(device)
         bsz = labels.shape[0]
 
@@ -114,7 +113,7 @@ def train_epoch(model, train_loader, cfg, optimizer, epoch_num):
                   f1_epoch.avg.item() * 100.0, loss_epoch.avg.item()), flush=True)
 
 
-def val_epoch(model, data_loader, cfg, is_final=False):
+def val_epoch(model, data_loader, cfg, res_path, is_final=False):
     model.eval()
 
     # init
@@ -129,14 +128,14 @@ def val_epoch(model, data_loader, cfg, is_final=False):
     predict = []
     for batch_num, batch in enumerate(data_loader):
 
-        img = batch['img'].to(device)
+        img = batch['img'].to(torch.float).to(device)
         bsz = img.shape[0]
 
         with torch.no_grad():
             scores = model.forward(img)
             preds = scores.argmax(1)
 
-            if data_loader.dataset.split == 'val':
+            if data_loader.dataset.split != 'test':
                 # if not is_final:
                 labels = batch['label_idxs'].to(device)
                 loss = F.cross_entropy(scores, labels)
@@ -158,9 +157,14 @@ def val_epoch(model, data_loader, cfg, is_final=False):
                 f1_batch = f1_batch / np.sum(weight_exist, axis=0)
                 f1_epoch.update(f1_batch, bsz)
 
-            target = batch['img_name'][0].find('eJ')
-            results.append(batch['img_name'][0][target:-3] + 'CSV')
-            predict.append(chr(ord('A') + int(preds)))
+            if cfg.is_point == False:
+                target = batch['img_name'][0].find('eJ')
+                results.append(batch['img_name'][0][target:-3] + 'CSV')
+                predict.append(chr(ord('A') + int(preds)))
+            else:
+                target = batch['img_name']
+                results.append(target)
+                predict.append(chr(ord('A') + int(preds)))
 
     if data_loader.dataset.split == 'val':
         # if not is_final:
@@ -175,10 +179,11 @@ def val_epoch(model, data_loader, cfg, is_final=False):
         df['defectType'] = predict
 
         # macro f1-score: fileName: ['eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.csv', 'eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.csv'];
-        df['fileName'][
-            results.index('eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.CSV')] = 'eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.csv'
-        df['fileName'][
-            results.index('eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.CSV')] = 'eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.csv'
+        if cfg.is_point == False:
+            df['fileName'][
+                results.index('eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.CSV')] = 'eJzzCzU0MTIyNjQ0NHU0MgAAGBYDCw==.csv'
+            df['fileName'][
+                results.index('eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.CSV')] = 'eJzzCzM0MDUyNjQ0MnQxNAEAGBUDDg==.csv'
 
         df.to_csv(pred_path, index=False)
         print("Predictions saved at {}".format(pred_path))
@@ -186,7 +191,7 @@ def val_epoch(model, data_loader, cfg, is_final=False):
     return f1_epoch.avg * 100.0
 
 
-def train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg):
+def train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg, res_path):
     optimizer, scheduler = get_optim(model, cfg)
 
     best_acc = 0.0
@@ -197,7 +202,7 @@ def train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg):
         # separate train and val set
         if val_loader is not None:
             print("=================Epo {}: Validating=================".format(epoch))
-            cur_acc = val_epoch(model, val_loader, cfg, is_final=False)
+            cur_acc = val_epoch(model, val_loader, cfg, res_path, is_final=False)
             _ = save_last_model(epoch, model, optimizer, suffix=cfg.model_name)
 
             # save the best model
@@ -215,7 +220,7 @@ def train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg):
             # print("Current lr: ", scheduler.get_last_lr())
 
 
-if __name__ == '__main__':
+def main():
     # init
     pprint(cfg)
     set_seed(cfg.SEED)
@@ -225,13 +230,13 @@ if __name__ == '__main__':
 
     # dataset & dataloader
     if not cfg.is_test:
-        train_dataset = DND(cfg, split=cfg.train_set)
+        train_dataset = Dataset_image(cfg, split=cfg.train_set)
         train_loader = DataLoader(train_dataset, batch_size=cfg.bsz, shuffle=True, num_workers=cfg.NWORK,
                                   drop_last=False)
-        val_dataset = DND(cfg, split='val')
+        val_dataset = Dataset_image(cfg, split='val')
         val_loader = DataLoader(val_dataset, batch_size=1, num_workers=cfg.NWORK, drop_last=False)
         # val_loader = None
-    test_dataset = DND(cfg, split='test')
+    test_dataset = Dataset_image(cfg, split='test')
     test_loader = DataLoader(test_dataset, batch_size=1, num_workers=cfg.NWORK, drop_last=False)
 
     # model
@@ -241,13 +246,72 @@ if __name__ == '__main__':
 
     # load model
     model = torch.nn.DataParallel(model)  # , device_ids=[0, 1]
-    model, start_epoch = load_model(cfg, model)
+    if cfg.no_pretrain == True:
+        start_epoch = 0
+    else:
+        model, start_epoch = load_model(cfg, model)
     model.to(device)
 
     if not cfg.is_test:
-        train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg)
+        train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg, res_path)
         print("=================Start testing!=================", flush=True)
-        _ = val_epoch(model, test_loader, cfg, is_final=True)
+        _ = val_epoch(model, test_loader, cfg, res_path, is_final=True)
     else:
         print("=================Start testing!=================", flush=True)
-        _ = val_epoch(model, test_loader, cfg, is_final=True)
+        _ = val_epoch(model, test_loader, cfg, res_path, is_final=True)
+
+
+def main_point():
+    # init
+    pprint(cfg)
+    set_seed(cfg.SEED)
+    res_path = os.path.join(project_root, 'experiments', time.strftime('%Y_%m_%d_%H_%M_%S', time.localtime()))
+    os.makedirs(res_path, exist_ok=True)
+    sys.stdout = Logger(res_path + '/experiment.log', sys.stdout)
+
+    # dataset & dataloader
+    if not cfg.is_test:
+        trainval_dataset = Dataset_point(cfg, split=cfg.train_set)
+
+        trainval_len = int(len(trainval_dataset))
+        train_len = int(trainval_len * 0.8)
+        val_len = trainval_len - train_len
+
+        train_dataset, val_dataset = random_split(trainval_dataset, [train_len, val_len])
+        train_dataset.split = 'train'
+        val_dataset.split = 'val'
+
+        train_loader = DataLoader(train_dataset, batch_size=cfg.bsz, shuffle=True, num_workers=cfg.NWORK,
+                                  drop_last=False)
+        val_loader = DataLoader(val_dataset, batch_size=1, num_workers=cfg.NWORK, drop_last=False)
+        # val_loader = None
+    test_dataset = Dataset_image(cfg, split='test')
+    test_loader = DataLoader(test_dataset, batch_size=1, num_workers=cfg.NWORK, drop_last=False)
+
+    # model
+    cfg.num_classes = len(test_dataset.class_to_ind)
+    model = MyModel_point(cfg)
+    # print(print_para(model), flush=True)
+
+    # load model
+    model = torch.nn.DataParallel(model)  # , device_ids=[0, 1]
+    if cfg.no_pretrain == True:
+        start_epoch = 0
+    else:
+        model, start_epoch = load_model(cfg, model)
+    model.to(device)
+
+    if not cfg.is_test:
+        train_model(model, train_loader, val_loader, test_loader, start_epoch, cfg, res_path)
+        print("=================Start testing!=================", flush=True)
+        _ = val_epoch(model, test_loader, cfg, res_path, is_final=True)
+    else:
+        print("=================Start testing!=================", flush=True)
+        _ = val_epoch(model, test_loader, cfg, res_path, is_final=True)
+
+
+if __name__ == '__main__':
+    if cfg.is_point == False:
+        main()
+    else:
+        main_point()

@@ -11,9 +11,9 @@ from timm.data import create_transform
 
 
 # Deep Nutrient Deficiency dataset
-class DND(Dataset):
+class Dataset_image(Dataset):
     def __init__(self, cfg, split='train'):
-        super(DND, self).__init__()
+        super().__init__()
 
         if split not in ('trainval', 'train', 'val', 'test'):
             raise ValueError("split must be in trainval, train, val, or test. Supplied {}".format(split))

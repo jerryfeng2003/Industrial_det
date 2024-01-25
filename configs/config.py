@@ -22,6 +22,10 @@ cfg.num_classes = 5
 cfg.acc_bsz = 1
 cfg.train_set = 'train'
 cfg.model_name = 'swin_v2_b'
+cfg.is_point = True
+if cfg.is_point == True:
+    cfg.model_name = 'point_mae'
+    cfg.npoints = 10024
 
 # models:
 # Convnet:
@@ -44,7 +48,7 @@ cfg.model_name = 'swin_v2_b'
 # Model ensemble: vote, add, (ME tactics...)
 
 # read papers !!!
-
+cfg.no_pretrain = True
 cfg.from_scratch = True
 cfg.model_path = cfg.model_name + '.pth'
 if cfg.from_scratch and cfg.is_test == False:
