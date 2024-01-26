@@ -16,13 +16,13 @@ cfg.is_test = False
 cfg.use_cache = False
 cfg.p_interval = 100
 cfg.ngups = 1
-cfg.im_scale = 256
+cfg.im_scale = 224
 cfg.bsz = 4
 cfg.num_classes = 5
 cfg.acc_bsz = 1
 cfg.train_set = 'train'
-cfg.model_name = 'swin_v2_b'
-cfg.is_point = True
+cfg.model_name = 'mae'
+cfg.is_point = False
 if cfg.is_point == True:
     cfg.model_name = 'point_mae'
     cfg.npoints = 10024
@@ -48,7 +48,7 @@ if cfg.is_point == True:
 # Model ensemble: vote, add, (ME tactics...)
 
 # read papers !!!
-cfg.no_pretrain = True
+cfg.no_pretrain = False
 cfg.from_scratch = True
 cfg.model_path = cfg.model_name + '.pth'
 if cfg.from_scratch and cfg.is_test == False:
